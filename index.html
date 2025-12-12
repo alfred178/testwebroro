@@ -1,0 +1,677 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- SEO Meta Tags -->
+    <title>Roro-Horoscopes - Your Daily Zodiac Readings</title>
+    <meta name="description" content="Get your free daily, weekly, and monthly horoscopes from Roro-Horoscopes. Explore zodiac signs, astrology, and more.">
+    <meta name="keywords" content="horoscopes, zodiac, astrology, daily horoscope, zodiac signs, aries, taurus, gemini, cancer, leo, virgo, libra, scorpio, sagittarius, capricorn, aquarius, pisces">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Lato:wght@400;700&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome for Social Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <!-- CSS Styles -->
+    <style>
+        /* CSS Variables for easy theme customization */
+        :root {
+            --background-color: #1a1a2e;
+            --primary-color: #9b59b6;
+            --accent-color: #ffd700;
+            --text-color: #ffffff;
+            --secondary-text-color: #cccccc;
+            --card-background: #2a2a4e;
+            --font-family-headings: 'Montserrat', sans-serif;
+            --font-family-body: 'Lato', sans-serif;
+        }
+
+        /* Global Styles & Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--background-color);
+            color: var(--text-color);
+            font-family: var(--font-family-body);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        h1, h2, h3 {
+            font-family: var(--font-family-headings);
+            font-weight: 700;
+            color: var(--accent-color);
+        }
+
+        section {
+            padding: 80px 0;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 50px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        /* Header & Navigation */
+        .header {
+            background-color: rgba(26, 26, 46, 0.9);
+            padding: 15px 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            transition: background-color 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: var(--font-family-headings);
+            font-size: 1.8rem;
+            color: var(--accent-color);
+            text-decoration: none;
+            font-weight: 700;
+        }
+
+        .nav-links {
+            list-style: none;
+            display: flex;
+        }
+
+        .nav-links li {
+            margin-left: 30px;
+        }
+
+        .nav-links a {
+            color: var(--text-color);
+            text-decoration: none;
+            font-size: 1rem;
+            transition: color 0.3s ease;
+            font-weight: 600;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent-color);
+        }
+        
+        .hamburger {
+            display: none;
+            cursor: pointer;
+            flex-direction: column;
+            gap: 5px;
+        }
+        .hamburger .bar {
+            width: 25px;
+            height: 3px;
+            background-color: var(--text-color);
+            transition: all 0.3s ease;
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            background-image: linear-gradient(rgba(26, 26, 46, 0.7), rgba(26, 26, 46, 0.9)), url('https://picsum.photos/1920/1080?grayscale&blur=2');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+
+        .hero-content h1 {
+            font-size: 4rem;
+            margin-bottom: 20px;
+        }
+
+        .hero-content p {
+            font-size: 1.2rem;
+            max-width: 600px;
+            margin: 0 auto 30px;
+            color: var(--secondary-text-color);
+        }
+
+        .cta-button {
+            background-color: var(--accent-color);
+            color: var(--background-color);
+            padding: 15px 30px;
+            text-decoration: none;
+            font-weight: 700;
+            border-radius: 50px;
+            transition: transform 0.3s ease, background-color 0.3s ease;
+            display: inline-block;
+            border: none;
+            cursor: pointer;
+            font-size: 1.1rem;
+        }
+
+        .cta-button:hover {
+            background-color: var(--primary-color);
+            color: var(--text-color);
+            transform: translateY(-3px);
+        }
+
+        /* Zodiac Signs Grid Section */
+        .zodiac-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+        }
+
+        .zodiac-card {
+            background-color: var(--card-background);
+            padding: 20px;
+            text-align: center;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 1px solid var(--primary-color);
+        }
+
+        .zodiac-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 20px rgba(155, 89, 182, 0.3);
+        }
+
+        .zodiac-symbol {
+            font-size: 3rem;
+            margin-bottom: 10px;
+        }
+
+        .zodiac-card h3 {
+            margin-bottom: 5px;
+            font-size: 1.4rem;
+        }
+
+        .zodiac-card p {
+            color: var(--secondary-text-color);
+            font-size: 0.9rem;
+        }
+        
+        /* Detailed Zodiac Signs Section */
+        .zodiac-details-container {
+             display: flex;
+             flex-direction: column;
+             gap: 40px;
+        }
+
+        .zodiac-article {
+            background-color: var(--card-background);
+            padding: 30px;
+            border-radius: 10px;
+            border-left: 5px solid var(--accent-color);
+        }
+        
+        .zodiac-article h3 {
+            font-size: 2rem;
+            margin-bottom: 15px;
+        }
+
+        .zodiac-article p {
+            margin-bottom: 10px;
+        }
+        
+        .zodiac-article strong {
+            color: var(--accent-color);
+        }
+
+        /* About Us Section */
+        #about {
+            background-color: var(--card-background);
+        }
+        .about-content {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        /* Footer */
+        .footer {
+            background-color: #111122;
+            padding: 40px 0;
+            text-align: center;
+        }
+        
+        .footer .contact-info {
+            margin-bottom: 20px;
+        }
+        
+        .footer .contact-info a {
+            color: var(--accent-color);
+            text-decoration: none;
+            font-size: 1.1rem;
+        }
+
+        .social-icons a {
+            color: var(--text-color);
+            font-size: 1.5rem;
+            margin: 0 15px;
+            transition: color 0.3s ease;
+        }
+
+        .social-icons a:hover {
+            color: var(--accent-color);
+        }
+        
+        .copyright {
+            margin-top: 20px;
+            color: var(--secondary-text-color);
+            font-size: 0.9rem;
+        }
+
+        /* Horoscope Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0,0,0,0.7);
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .modal.show {
+            display: flex;
+        }
+
+        .modal-content {
+            background-color: var(--card-background);
+            margin: auto;
+            padding: 30px;
+            border: 1px solid var(--primary-color);
+            width: 90%;
+            max-width: 600px;
+            border-radius: 10px;
+            position: relative;
+            animation: fadeIn 0.5s;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: scale(0.9); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        .close-button {
+            color: #aaa;
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+
+        .close-button:hover,
+        .close-button:focus {
+            color: var(--accent-color);
+            text-decoration: none;
+        }
+
+        #modal-title {
+            margin-bottom: 20px;
+            font-size: 2rem;
+        }
+        
+        #modal-body {
+            font-size: 1.1rem;
+            color: var(--secondary-text-color);
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-links {
+                position: absolute;
+                top: 70px;
+                right: 0;
+                width: 100%;
+                background-color: var(--background-color);
+                flex-direction: column;
+                align-items: center;
+                max-height: 0;
+                overflow: hidden;
+                transition: max-height 0.5s ease-in-out;
+            }
+            .nav-links.active {
+                max-height: 300px; /* Adjust as needed */
+            }
+            .nav-links li {
+                margin: 15px 0;
+            }
+            .hamburger {
+                display: flex;
+            }
+            .hamburger.active .bar:nth-child(2) {
+                opacity: 0;
+            }
+            .hamburger.active .bar:nth-child(1) {
+                transform: translateY(8px) rotate(45deg);
+            }
+            .hamburger.active .bar:nth-child(3) {
+                transform: translateY(-8px) rotate(-45deg);
+            }
+
+            .hero-content h1 {
+                font-size: 2.8rem;
+            }
+            .hero-content p {
+                font-size: 1rem;
+            }
+            
+            .section-title {
+                font-size: 2rem;
+            }
+            
+            .zodiac-grid {
+                grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+            }
+        }
+        
+    </style>
+<link rel="stylesheet" href="/index.css">
+</head>
+<body>
+
+    <!-- Header Section -->
+    <header class="header">
+        <div class="container navbar">
+            <a href="#home" class="logo">Roro-Horoscopes</a>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#daily-horoscopes">Daily Horoscopes</a></li>
+                <li><a href="#zodiac-details">Zodiacs</a></li>
+                <li><a href="#about">About Us</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+            <div class="hamburger">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <!-- Hero Section -->
+        <section id="home" class="hero">
+            <div class="hero-content">
+                <h1>Discover Your Destiny in the Stars</h1>
+                <p>Unlock the secrets of the cosmos and navigate your life's path with personalized daily insights from the ancient wisdom of astrology.</p>
+                <a href="#daily-horoscopes" class="cta-button">See Your Daily Horoscope</a>
+            </div>
+        </section>
+
+        <!-- Zodiac Signs Grid Section -->
+        <section id="daily-horoscopes">
+            <div class="container">
+                <h2 class="section-title">Choose Your Zodiac Sign</h2>
+                <div class="zodiac-grid">
+                    <!-- Zodiac Cards will be dynamically added here by JavaScript -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Detailed Zodiac Info Section -->
+        <section id="zodiac-details">
+            <div class="container">
+                <h2 class="section-title">The 12 Zodiac Signs</h2>
+                <div class="zodiac-details-container">
+                  <!-- Articles for each sign -->
+                   <article class="zodiac-article">
+                       <h3>♈ Aries</h3>
+                       <p><strong>Traits:</strong> Ambitious, independent, and courageous. Aries are natural leaders who are not afraid to take risks and forge their own path. They are energetic, enthusiastic, and often competitive.</p>
+                       <p><strong>Key Info:</strong> Ruling Planet: Mars, Element: Fire, Lucky Numbers: 1, 8, 17.</p>
+                       <p><strong>Compatibility:</strong> Generally compatible with Leo, Sagittarius, and Gemini.</p>
+                   </article>
+                   <article class="zodiac-article">
+                       <h3>♉ Taurus</h3>
+                       <p><strong>Traits:</strong> Reliable, patient, and practical. Taureans appreciate the finer things in life and are known for their strong will and determination. They are loyal friends and partners.</p>
+                       <p><strong>Key Info:</strong> Ruling Planet: Venus, Element: Earth, Lucky Numbers: 2, 6, 9.</p>
+                       <p><strong>Compatibility:</strong> Works well with Virgo, Capricorn, and Cancer.</p>
+                   </article>
+                   <article class="zodiac-article">
+                       <h3>♊ Gemini</h3>
+                       <p><strong>Traits:</strong> Versatile, expressive, and curious. Geminis are social butterflies with a quick wit and a love for communication. They are adaptable and thrive on variety and intellectual stimulation.</p>
+                       <p><strong>Key Info:</strong> Ruling Planet: Mercury, Element: Air, Lucky Numbers: 5, 7, 14.</p>
+                       <p><strong>Compatibility:</strong> Connects well with Libra, Aquarius, and Aries.</p>
+                   </article>
+                   <article class="zodiac-article">
+                       <h3>♋ Cancer</h3>
+                       <p><strong>Traits:</strong> Intuitive, sentimental, and compassionate. Cancers are deeply connected to their home and family. They are highly imaginative and protective of their loved ones.</p>
+                       <p><strong>Key Info:</strong> Ruling Planet: Moon, Element: Water, Lucky Numbers: 2, 3, 15.</p>
+                       <p><strong>Compatibility:</strong> Harmonizes with Scorpio, Pisces, and Taurus.</p>
+                   </article>
+                   <article class="zodiac-article">
+                       <h3>♌ Leo</h3>
+                       <p><strong>Traits:</strong> Dramatic, outgoing, and fiery. Leos love to be the center of attention and are known for their creativity, generosity, and warm-hearted nature. They are natural-born leaders.</p>
+                       <p><strong>Key Info:</strong> Ruling Planet: Sun, Element: Fire, Lucky Numbers: 1, 3, 10.</p>
+                       <p><strong>Compatibility:</strong> Pairs well with Aries, Sagittarius, and Libra.</p>
+                   </article>
+                   <article class="zodiac-article">
+                       <h3>♍ Virgo</h3>
+                       <p><strong>Traits:</strong> Practical, loyal, and analytical. Virgos have a keen eye for detail and a methodical approach to life. They are hardworking, kind, and always willing to help others.</p>
+                       <p><strong>Key Info:</strong> Ruling Planet: Mercury, Element: Earth, Lucky Numbers: 5, 14, 15.</p>
+                       <p><strong>Compatibility:</strong> Aligns with Taurus, Capricorn, and Scorpio.</p>
+                   </article>
+                   <article class="zodiac-article">
+                       <h3>♎ Libra</h3>
+                       <p><strong>Traits:</strong> Social, fair-minded, and diplomatic. Libras seek harmony and balance in all things. They are gracious, charming, and have a strong sense of justice.</p>
+                       <p><strong>Key Info:</strong> Ruling Planet: Venus, Element: Air, Lucky Numbers: 4, 6, 13.</p>
+                       <p><strong>Compatibility:</strong> Gets along with Gemini, Aquarius, and Leo.</p>
+                   </article>
+                   <article class="zodiac-article">
+                       <h3>♏ Scorpio</h3>
+                       <p><strong>Traits:</strong> Passionate, stubborn, and resourceful. Scorpios are known for their intensity and determination. They are true friends but can be formidable adversaries. They are brave and decisive.</p>
+                       <p><strong>Key Info:</strong> Ruling Planet: Pluto, Mars, Element: Water, Lucky Numbers: 8, 11, 18.</p>
+                       <p><strong>Compatibility:</strong> Complements Cancer, Pisces, and Virgo.</p>
+                   </article>
+                   <article class="zodiac-article">
+                       <h3>♐ Sagittarius</h3>
+                       <p><strong>Traits:</strong> Extroverted, optimistic, and generous. Sagittarians have a great sense of humor and an intense curiosity. They love freedom and adventure and are always eager to explore.</p>
+                       <p><strong>Key Info:</strong> Ruling Planet: Jupiter, Element: Fire, Lucky Numbers: 3, 7, 9.</p>
+                       <p><strong>Compatibility:</strong> Great with Aries, Leo, and Aquarius.</p>
+                   </article>
+                   <article class="zodiac-article">
+                       <h3>♑ Capricorn</h3>
+                       <p><strong>Traits:</strong> Serious, independent, and disciplined. Capricorns are masters of self-control and have a strong sense of responsibility. They are ambitious and value tradition and family.</p>
+                       <p><strong>Key Info:</strong> Ruling Planet: Saturn, Element: Earth, Lucky Numbers: 4, 8, 13.</p>
+                       <p><strong>Compatibility:</strong> A good match for Taurus, Virgo, and Pisces.</p>
+                   </article>
+                   <article class="zodiac-article">
+                       <h3>♒ Aquarius</h3>
+                       <p><strong>Traits:</strong> Deep, imaginative, and original. Aquarians are forward-thinking humanitarians who love to fight for important causes. They are independent and can be a bit eccentric.</p>
+                       <p><strong>Key Info:</strong> Ruling Planet: Uranus, Element: Air, Lucky Numbers: 4, 7, 11.</p>
+                       <p><strong>Compatibility:</strong> Thrives with Gemini, Libra, and Sagittarius.</p>
+                   </article>
+                   <article class="zodiac-article">
+                       <h3>♓ Pisces</h3>
+                       <p><strong>Traits:</strong> Affectionate, empathetic, and wise. Pisceans are artistic and intuitive, with a deep connection to the spiritual world. They are compassionate and gentle souls.</p>
+                       <p><strong>Key Info:</strong> Ruling Planet: Neptune, Element: Water, Lucky Numbers: 3, 9, 12.</p>
+                       <p><strong>Compatibility:</strong> Finds harmony with Cancer, Scorpio, and Capricorn.</p>
+                   </article>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- About Us Section -->
+        <section id="about">
+            <div class="container">
+                <h2 class="section-title">About Roro-Horoscopes</h2>
+                <div class="about-content">
+                    <p>Welcome to Roro-Horoscopes, your sanctuary for celestial guidance and self-discovery. Our mission is to illuminate your path by translating the ancient language of the stars into practical, modern-day wisdom. We believe that astrology is a powerful tool for understanding ourselves, our relationships, and our place in the universe.</p>
+                    <p>Beyond daily horoscopes, we are proud to offer the exclusive <strong>Soul Pattern Reader</strong>. This unique service dives deep into your natal chart to reveal the intricate blueprint of your soul's journey, helping you to unlock your true potential and live a more authentic, fulfilled life. Join us as we explore the cosmos together.</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer and Contact Section -->
+    <footer id="contact" class="footer">
+        <div class="container">
+            <div class="contact-info">
+                <h3>Get in Touch</h3>
+                <p>Have questions? Reach out to us at <a href="mailto:contact@roro-horoscopes.com">contact@roro-horoscopes.com</a></p>
+            </div>
+            <div class="social-icons">
+                <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+            </div>
+            <p class="copyright">&copy; 2025 Roro-Horoscopes. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Horoscope Modal -->
+    <div id="horoscopeModal" class="modal">
+        <div class="modal-content">
+            <span class="close-button">&times;</span>
+            <h2 id="modal-title"></h2>
+            <p id="modal-body"></p>
+        </div>
+    </div>
+
+    <!-- JavaScript -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+
+            // --- Data for Zodiac Signs ---
+            const zodiacSigns = [
+                { name: 'Aries', symbol: '♈', date: 'Mar 21 - Apr 19' },
+                { name: 'Taurus', symbol: '♉', date: 'Apr 20 - May 20' },
+                { name: 'Gemini', symbol: '♊', date: 'May 21 - Jun 20' },
+                { name: 'Cancer', symbol: '♋', date: 'Jun 21 - Jul 22' },
+                { name: 'Leo', symbol: '♌', date: 'Jul 23 - Aug 22' },
+                { name: 'Virgo', symbol: '♍', date: 'Aug 23 - Sep 22' },
+                { name: 'Libra', symbol: '♎', date: 'Sep 23 - Oct 22' },
+                { name: 'Scorpio', symbol: '♏', date: 'Oct 23 - Nov 21' },
+                { name: 'Sagittarius', symbol: '♐', date: 'Nov 22 - Dec 21' },
+                { name: 'Capricorn', symbol: '♑', date: 'Dec 22 - Jan 19' },
+                { name: 'Aquarius', symbol: '♒', date: 'Jan 20 - Feb 18' },
+                { name: 'Pisces', symbol: '♓', date: 'Feb 19 - Mar 20' }
+            ];
+
+            // Placeholder horoscope texts
+            const horoscopeTexts = {
+                Aries: "Today is a day for bold action, Aries. Your dynamic energy is at its peak, making it the perfect time to start a new project or tackle a challenging task. Trust your instincts and lead the way.",
+                Taurus: "Focus on comfort and stability today, Taurus. It's a great day to indulge in simple pleasures and connect with nature. Financial matters may look promising, so keep an eye out for new opportunities.",
+                Gemini: "Your communication skills are shining today, Gemini. Engage in meaningful conversations and share your ideas. A short trip or a new learning experience could bring unexpected joy.",
+                Cancer: "Your intuition is your guide today, Cancer. Pay attention to your feelings and the needs of those around you. Spending quality time with family will be particularly rewarding.",
+                Leo: "Your creativity is in the spotlight, Leo. Express yourself through your passions and don't be afraid to take center stage. Your confidence and warmth will inspire others.",
+                Virgo: "It's a productive day for you, Virgo. Your attention to detail will help you accomplish a great deal. Focus on organizing your space and your thoughts for maximum efficiency.",
+                Libra: "Harmony in relationships is key today, Libra. Seek balance and cooperation in your interactions. Your charm and diplomacy will help smooth over any potential conflicts.",
+                Scorpio: "Your intensity and focus are powerful assets today, Scorpio. Dive deep into a project that matters to you. Your determination will help you uncover valuable insights.",
+                Sagittarius: "Adventure is calling, Sagittarius! Expand your horizons, whether through travel, learning, or trying something new. Your optimism is contagious and will open new doors.",
+                Capricorn: "Your ambition and discipline are highlighted today, Capricorn. Make progress on your long-term goals. Your hard work is paying off, so stay focused on the path ahead.",
+                Aquarius: "Your innovative ideas are needed today, Aquarius. Think outside the box and connect with like-minded individuals. Your unique perspective can lead to exciting breakthroughs.",
+                Pisces: "Your compassion and creativity are your greatest strengths today, Pisces. Use your artistic talents to express your emotions or lend a helping hand to someone in need."
+            };
+
+
+            // --- DOM Elements ---
+            const zodiacGrid = document.querySelector('.zodiac-grid');
+            const modal = document.getElementById('horoscopeModal');
+            const modalTitle = document.getElementById('modal-title');
+            const modalBody = document.getElementById('modal-body');
+            const closeButton = document.querySelector('.close-button');
+            const hamburger = document.querySelector('.hamburger');
+            const navLinks = document.querySelector('.nav-links');
+
+
+            // --- Function to Create Zodiac Cards ---
+            function createZodiacCards() {
+                zodiacSigns.forEach(sign => {
+                    const card = document.createElement('div');
+                    card.classList.add('zodiac-card');
+                    card.dataset.sign = sign.name; // Add data attribute for easier lookup
+                    
+                    card.innerHTML = `
+                        <div class="zodiac-symbol">${sign.symbol}</div>
+                        <h3>${sign.name}</h3>
+                        <p>${sign.date}</p>
+                    `;
+                    
+                    // Add click event listener to each card
+                    card.addEventListener('click', () => openModal(sign.name));
+                    
+                    zodiacGrid.appendChild(card);
+                });
+            }
+
+
+            // --- Modal Functionality ---
+            function openModal(signName) {
+                modalTitle.textContent = `${signName} Daily Horoscope`;
+                modalBody.textContent = horoscopeTexts[signName] || "Your horoscope for today is coming soon!";
+                modal.classList.add('show');
+            }
+
+            function closeModal() {
+                modal.classList.remove('show');
+            }
+
+            closeButton.addEventListener('click', closeModal);
+            modal.addEventListener('click', function(event) {
+                if (event.target === modal) {
+                    closeModal();
+                }
+            });
+            window.addEventListener('keydown', function(event) {
+                if (event.key === 'Escape' && modal.classList.contains('show')) {
+                    closeModal();
+                }
+            });
+
+
+            // --- Mobile Navigation (Hamburger Menu) ---
+            hamburger.addEventListener('click', () => {
+                hamburger.classList.toggle('active');
+                navLinks.classList.toggle('active');
+            });
+            
+            // Close nav when a link is clicked
+            document.querySelectorAll('.nav-links a').forEach(link => {
+                link.addEventListener('click', () => {
+                     hamburger.classList.remove('active');
+                     navLinks.classList.remove('active');
+                });
+            });
+
+
+            // --- Initialization ---
+            createZodiacCards();
+        });
+    </script>
+<script type="module" src="/index.tsx"></script>
+</body>
+</html>
